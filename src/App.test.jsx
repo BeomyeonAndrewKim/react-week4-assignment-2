@@ -1,10 +1,18 @@
 import { render } from '@testing-library/react';
+import { useSelector } from 'react-redux';
 import App from './App';
+
+jest.mock('react-redux');
 
 describe('App', () => {
   it('render title text correctly', () => {
-    const { getByText } = render(<App />);
+    useSelector.mockImplementation((selector) => selector({
+      restaurants: [],
+      restaurant: {},
+    }));
 
-    expect(getByText(/Restaurants/)).not.toBeNull();
+    const { queryByText } = render(<App />);
+
+    expect(queryByText(/김밥제국/)).toBeNull();
   });
 });
