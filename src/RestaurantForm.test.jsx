@@ -4,7 +4,7 @@ import RestaurantForm from './RestaurantForm';
 jest.mock('react-redux');
 
 describe('RestaurantForm', () => {
-  it('render title text correctly', () => {
+  it('changes restaurant form and registers restaurant', () => {
     const restaurant = {
       name: '마법사주방',
       category: '이탈리안',
@@ -17,15 +17,18 @@ describe('RestaurantForm', () => {
       <RestaurantForm restaurant={restaurant} onClick={handleClick} onChange={handleChange} />,
     );
 
+    // display restaurant form
     expect(getByDisplayValue('마법사주방')).not.toBeNull();
     expect(getByDisplayValue('이탈리안')).not.toBeNull();
     expect(getByDisplayValue('강남구')).not.toBeNull();
 
     expect(getByText(/등록/)).not.toBeNull();
 
+    // register restaurant correctly
     fireEvent.change(getByDisplayValue('강남구'), {
       target: { name: 'address', value: '서초구' },
     });
+
     fireEvent.click(getByText(/등록/));
 
     expect(handleChange).toBeCalledWith({ name: 'address', value: '서초구' });

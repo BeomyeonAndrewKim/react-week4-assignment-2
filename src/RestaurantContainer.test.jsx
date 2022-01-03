@@ -6,7 +6,7 @@ import restaurants from '../fixtures/restaurants';
 jest.mock('react-redux');
 
 describe('RestaurantsContainer', () => {
-  it('render title text correctly', () => {
+  it('render valid restaurants', () => {
     useSelector.mockImplementation((selector) => selector({
       restaurants,
     }));
