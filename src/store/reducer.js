@@ -8,6 +8,7 @@ export const initialState = {
   newId: 100,
   restaurants: [],
   restaurant: emptyRestaurant,
+  categories: [],
 };
 
 export default function reducer(state = initialState, { type, payload }) {
@@ -39,6 +40,13 @@ export default function reducer(state = initialState, { type, payload }) {
         { ...restaurant, id: newId },
       ],
       restaurant: emptyRestaurant,
+    };
+  }
+  case 'setCategories': {
+    const { categories } = payload;
+    return {
+      ...state,
+      categories,
     };
   }
   default:
